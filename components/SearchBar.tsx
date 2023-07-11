@@ -1,11 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { SearchManufacturer } from './';
 
+const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
+  <button type="submit" className={`-ml-3 z-10 ${otherClasses}`}>
+    <Image
+      src="/magnifying-glass.svg"
+      alt="magnifyinc-glasss"
+      width={40}
+      height={40}
+      className="object-contain"></Image>
+  </button>
+);
+
 const SearchBar = () => {
   const [manufacturer, setManufacturer] = useState('');
+
+  const [model, setModel] = useState('');
 
   const handleSearch = () => {};
 
@@ -15,7 +29,25 @@ const SearchBar = () => {
         <SearchManufacturer
           manufacturer={manufacturer}
           setManufacturer={setManufacturer}></SearchManufacturer>
+        <SearchButton otherClasses="sm:hidden"></SearchButton>
       </div>
+      <div className="searchbar__item">
+        <Image
+          src="/model-icon.png"
+          width={25}
+          height={25}
+          className="absolute w-[20px] h-[20px] ml-4"
+          alt="car model"></Image>
+        <input
+          type="text"
+          name="model"
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+          placeholder="Tiguan"
+          className="searchbar__input"></input>
+        <SearchButton otherClasses="sm:hidden"></SearchButton>
+      </div>
+      <SearchButton otherClasses="max-sm:hidden"></SearchButton>
     </form>
   );
 };
